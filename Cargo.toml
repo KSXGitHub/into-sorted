@@ -12,6 +12,7 @@ keywords = [
   "trait",
   "fp",
   "utility",
+  "extension",
 ]
 categories = ["no-std", "rust-patterns"]
 include = [
