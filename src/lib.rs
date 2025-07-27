@@ -10,4 +10,11 @@ pub use stable::*;
 mod unstable;
 pub use unstable::*;
 
+pub mod prelude {
+    #[cfg(feature = "alloc")]
+    pub use crate::IntoSorted;
+
+    pub use crate::IntoSortedUnstable;
+}
+
 mod sealed;
