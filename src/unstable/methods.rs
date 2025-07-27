@@ -2,7 +2,7 @@ use super::functions::*;
 use core::cmp::Ordering;
 
 /// Utility methods to sort various types of arrays with an unstable algorithm.
-pub trait IntoUnstableSorted<Item>: crate::sealed::IsArray<Item> {
+pub trait IntoSortedUnstable<Item>: crate::sealed::IsArray<Item> {
     /// Sort an array by [`Ord`] and return it.
     fn into_sorted_unstable(self) -> Self
     where
@@ -20,7 +20,7 @@ pub trait IntoUnstableSorted<Item>: crate::sealed::IsArray<Item> {
         Key: Ord;
 }
 
-impl<Item, Array> IntoUnstableSorted<Item> for Array
+impl<Item, Array> IntoSortedUnstable<Item> for Array
 where
     Array: AsMut<[Item]> + Sized,
 {
