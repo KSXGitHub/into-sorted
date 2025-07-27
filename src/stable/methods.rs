@@ -1,5 +1,5 @@
 use super::functions::*;
-use core::{cmp::Ordering, ops::DerefMut};
+use core::cmp::Ordering;
 
 /// Utility methods to sort various types of arrays with a stable algorithm (requires allocation).
 pub trait IntoSorted<Item>: crate::sealed::IsArray<Item> {
@@ -28,7 +28,7 @@ pub trait IntoSorted<Item>: crate::sealed::IsArray<Item> {
 
 impl<Item, Array> IntoSorted<Item> for Array
 where
-    Array: DerefMut<Target = [Item]> + Sized,
+    Array: AsMut<[Item]> + Sized,
 {
     #[inline]
     fn into_sorted(self) -> Self

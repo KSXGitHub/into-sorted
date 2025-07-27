@@ -1,13 +1,13 @@
-use core::{cmp::Ordering, ops::DerefMut};
+use core::cmp::Ordering;
 
 /// Sort an array by [`Ord`] and return it.
 #[inline]
 pub fn into_sorted_unstable<Item, Array>(mut array: Array) -> Array
 where
-    Array: DerefMut<Target = [Item]>,
+    Array: AsMut<[Item]>,
     Item: Ord,
 {
-    array.sort_unstable();
+    array.as_mut().sort_unstable();
     array
 }
 
@@ -15,10 +15,10 @@ where
 #[inline]
 pub fn into_sorted_unstable_by<Item, Array, Order>(mut array: Array, order: Order) -> Array
 where
-    Array: DerefMut<Target = [Item]>,
+    Array: AsMut<[Item]>,
     Order: FnMut(&Item, &Item) -> Ordering,
 {
-    array.sort_unstable_by(order);
+    array.as_mut().sort_unstable_by(order);
     array
 }
 
@@ -29,10 +29,10 @@ pub fn into_sorted_unstable_by_key<Item, Array, Key, GetKey>(
     get_key: GetKey,
 ) -> Array
 where
-    Array: DerefMut<Target = [Item]>,
+    Array: AsMut<[Item]>,
     GetKey: FnMut(&Item) -> Key,
     Key: Ord,
 {
-    array.sort_unstable_by_key(get_key);
+    array.as_mut().sort_unstable_by_key(get_key);
     array
 }

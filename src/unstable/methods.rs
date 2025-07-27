@@ -1,5 +1,5 @@
 use super::functions::*;
-use core::{cmp::Ordering, ops::DerefMut};
+use core::cmp::Ordering;
 
 /// Utility methods to sort various types of arrays with an unstable algorithm.
 pub trait IntoUnstableSorted<Item>: crate::sealed::IsArray<Item> {
@@ -22,7 +22,7 @@ pub trait IntoUnstableSorted<Item>: crate::sealed::IsArray<Item> {
 
 impl<Item, Array> IntoUnstableSorted<Item> for Array
 where
-    Array: DerefMut<Target = [Item]> + Sized,
+    Array: AsMut<[Item]> + Sized,
 {
     #[inline]
     fn into_sorted_unstable(self) -> Self
