@@ -1,4 +1,7 @@
 //! Collection of utility methods and functions that take an owned array and return a sorted owned array.
+//!
+//! **Features:**
+//! * `alloc`: Provides stable sorting functions and methods which require allocations. This feature is enabled by default.
 
 #![no_std]
 
