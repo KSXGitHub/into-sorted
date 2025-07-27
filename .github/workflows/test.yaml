@@ -1,0 +1,38 @@
+name: Test
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    name: Test
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache
+        uses: actions/cache@v4
+        timeout-minutes: 1
+        continue-on-error: true
+        with:
+          path: |
+            ~/.cargo
+            target
+          key: ${{ github.job }}-${{ runner.os }}-${{ hashFiles('rust-toolchain') }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ github.job }}-${{ runner.os }}-${{ hashFiles('rust-toolchain') }}-${{ hashFiles('**/Cargo.lock') }}
+            ${{ github.job }}-${{ runner.os }}-${{ hashFiles('rust-toolchain') }}-
+
+      - name: Install Rust
+        shell: bash
+        run: |
+          installer=$(mktemp -d)/install-rustup
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > $installer
+          bash $installer --default-toolchain $(cat rust-toolchain) -y
+
+      - name: Test
+        shell: bash
+        run: ./test.sh

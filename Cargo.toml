@@ -1,0 +1,26 @@
+[package]
+name = "into-sorted"
+description = "Collection of utility methods and functions that take an owned array and return a sorted owned array"
+version = "0.0.0"
+authors = ["khai96_ <hvksmr1996@gmail.com>"]
+edition = "2021"
+readme = "README.md"
+license = "MIT"
+documentation = "https://docs.rs/into-sorted"
+repository = "https://github.com/KSXGitHub/into-sorted.git"
+keywords = [
+  "trait",
+  "fp",
+  "utility",
+]
+categories = ["no-std", "rust-patterns"]
+include = [
+  "/src",
+  "/Cargo.toml",
+  "/README.md",
+  "/LICENSE.md",
+]
+
+[features]
+default = ["alloc"]
+alloc = []
